@@ -128,9 +128,15 @@ def game_hash
   }
 end
 
-# Write code here
-# Build a method, `num_points_scored` that takes in an argument of a player's
-#name and returns the number of points scored for that player.
+#helper methods
+def team team_name
+  case team_name
+  when game_hash[:home][:team_name]
+    game_hash[:home]
+  when game_hash[:away][:team_name]
+    game_hash[:away]
+  end
+end
 
 def num_points_scored(players_name)
   game_hash.each do |location, team|
@@ -161,15 +167,31 @@ def shoe_size (players_name)
 end
 
 def team_colors team_name
-    game_hash.each do |location, team|
-      team.each do |attribute, data|
-binding.pry
-        if attribute == :team
-
-              return team[:colors]
-
+  case team_name
+  when game_hash[:home][:team_name]
+    game_hash[:home][:colors]
+  when game_hash[:away][:team_name]
+    game_hash[:away][:colors]
+  end
 end
 
+def team_names
+  [game_hash[:home][:team_name], game_hash[:away][:team_name]]
 end
-end
+
+#Build a method, `player_numbers`, that takes in an argument of a team name and returns an `Array` of the jersey numbers for that team.
+def player_numbers(input)
+  jersey_numbers=[]
+  game_hash.each do |team, team_info|
+    if team_info[:team_name]== input
+      team_info.each do |key, value|
+        if key == :players
+          value.each do |player|
+            jersey_numbers.push(player[:number])
+            end
+          end
+        end
+      end
+    end
+    return jersey_numbers
 end
