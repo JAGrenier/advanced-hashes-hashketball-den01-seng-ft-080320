@@ -209,3 +209,26 @@ def player_stats (input)
     end
   end
 end
+
+
+#Build a method, `big_shoe_rebounds`, that will return the number of rebounds
+  #associated with the player that has the largest shoe size. Break this one down
+  #into steps:
+
+  # First, find the player with the largest shoe size - mason plumlee 
+  # Then, return that player's number of rebounds - 11 
+  # Remember to think about return values here.
+  
+def big_shoe_rebounds 
+  big_shoe = 0 
+  rebounds = 0 
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |player|
+      if player[:shoe] > big_shoe 
+        big_shoe = player[:shoe]
+        rebounds = player[:rebounds]
+      end
+    end
+end 
+return rebounds 
+end 
